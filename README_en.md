@@ -1,7 +1,7 @@
 # ruoyi_project-bidding-sys
 
 *Read this in [中文](README.md).*
-## 介绍
+## introduce
 ruoyi_project-bidding-sys is a project bidding management system based on the [RuoYi](https://github.com/yangzongzhuan) framework, including the design of **Web front-end, applet, back-end and database table structure**, applet is the bidding client, and Web is the system management end. The project realizes the user registration function and login function of the applet and the web side, the review of the user registration account and the management of permissions, the management of roles, and the management of personnel; Realize the new project, project modification, project review and release on the web management side; It realizes the project information viewing, project participation, and uploading photos and attachments of the project implementation process in the bidding business of the Mini Program client.
 
 ![](resources/94245.png)
