@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.QingHan.project.mapper.OverviewMapper">
+    
+    <resultMap type="Overview" id="OverviewResult">
+        <result property="id"    column="id"    />
+        <result property="approvalId"    column="approval_id"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="managerId"    column="manager_id"    />
+        <result property="budgetTotal"    column="budget_total"    />
+        <result property="startDate"    column="start_date"    />
+        <result property="endDate"    column="end_date"    />
+        <result property="imageUrl"    column="Image_url"    />
+        <result property="briefDesc"    column="brief_desc"    />
+        <result property="attachmentPath"    column="attachment_path"    />
+    </resultMap>
+
+    <sql id="selectOverviewVo">
+        select id, approval_id, project_name, manager_id, budget_total, start_date, end_date, Image_url, brief_desc, attachment_path from pro_overview
+    </sql>
+
+    <select id="selectOverviewList" parameterType="Overview" resultMap="OverviewResult">
+        <include refid="selectOverviewVo"/>
+        <where>  
+            <if test="approvalId != null "> and approval_id = #{approvalId}</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="managerId != null "> and manager_id = #{managerId}</if>
+            <if test="budgetTotal != null "> and budget_total = #{budgetTotal}</if>
+            <if test="startDate != null "> and start_date = #{startDate}</if>
+            <if test="endDate != null "> and end_date = #{endDate}</if>
+            <if test="imageUrl != null  and imageUrl != ''"> and Image_url = #{imageUrl}</if>
+            <if test="briefDesc != null  and briefDesc != ''"> and brief_desc = #{briefDesc}</if>
+            <if test="attachmentPath != null  and attachmentPath != ''"> and attachment_path = #{attachmentPath}</if>
+        </where>
+    </select>
+    
+    <select id="selectOverviewById" parameterType="Long" resultMap="OverviewResult">
+        <include refid="selectOverviewVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertOverview" parameterType="Overview">
+        insert into pro_overview
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="approvalId != null">approval_id,</if>
+            <if test="projectName != null and projectName != ''">project_name,</if>
+            <if test="managerId != null">manager_id,</if>
+            <if test="budgetTotal != null">budget_total,</if>
+            <if test="startDate != null">start_date,</if>
+            <if test="endDate != null">end_date,</if>
+            <if test="imageUrl != null">Image_url,</if>
+            <if test="briefDesc != null and briefDesc != ''">brief_desc,</if>
+            <if test="attachmentPath != null">attachment_path,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="approvalId != null">#{approvalId},</if>
+            <if test="projectName != null and projectName != ''">#{projectName},</if>
+            <if test="managerId != null">#{managerId},</if>
+            <if test="budgetTotal != null">#{budgetTotal},</if>
+            <if test="startDate != null">#{startDate},</if>
+            <if test="endDate != null">#{endDate},</if>
+            <if test="imageUrl != null">#{imageUrl},</if>
+            <if test="briefDesc != null and briefDesc != ''">#{briefDesc},</if>
+            <if test="attachmentPath != null">#{attachmentPath},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOverview" parameterType="Overview">
+        update pro_overview
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="approvalId != null">approval_id = #{approvalId},</if>
+            <if test="projectName != null and projectName != ''">project_name = #{projectName},</if>
+            <if test="managerId != null">manager_id = #{managerId},</if>
+            <if test="budgetTotal != null">budget_total = #{budgetTotal},</if>
+            <if test="startDate != null">start_date = #{startDate},</if>
+            <if test="endDate != null">end_date = #{endDate},</if>
+            <if test="imageUrl != null">Image_url = #{imageUrl},</if>
+            <if test="briefDesc != null and briefDesc != ''">brief_desc = #{briefDesc},</if>
+            <if test="attachmentPath != null">attachment_path = #{attachmentPath},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOverviewById" parameterType="Long">
+        delete from pro_overview where id = #{id}
+    </delete>
+
+    <delete id="deleteOverviewByIds" parameterType="String">
+        delete from pro_overview where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

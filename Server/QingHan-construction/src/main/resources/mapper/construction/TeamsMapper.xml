@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.QingHan.construction.mapper.TeamsMapper">
+    
+    <resultMap type="Teams" id="TeamsResult">
+        <result property="teamId"    column="team_id"    />
+        <result property="teamName"    column="team_name"    />
+        <result property="qualificationLevel"    column="qualification_level"    />
+        <result property="responsiblePerson"    column="responsible_person"    />
+        <result property="contactInfo"    column="contact_info"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectTeamsVo">
+        select team_id, team_name, qualification_level, responsible_person, contact_info, create_time, update_time from con_teams
+    </sql>
+
+    <select id="selectTeamsList" parameterType="Teams" resultMap="TeamsResult">
+        <include refid="selectTeamsVo"/>
+        <where>  
+            <if test="teamName != null  and teamName != ''"> and team_name like concat('%', #{teamName}, '%')</if>
+            <if test="qualificationLevel != null  and qualificationLevel != ''"> and qualification_level = #{qualificationLevel}</if>
+            <if test="responsiblePerson != null  and responsiblePerson != ''"> and responsible_person = #{responsiblePerson}</if>
+        </where>
+    </select>
+    
+    <select id="selectTeamsByTeamId" parameterType="Long" resultMap="TeamsResult">
+        <include refid="selectTeamsVo"/>
+        where team_id = #{teamId}
+    </select>
+
+    <insert id="insertTeams" parameterType="Teams" useGeneratedKeys="true" keyProperty="teamId">
+        insert into con_teams
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="teamName != null and teamName != ''">team_name,</if>
+            <if test="qualificationLevel != null and qualificationLevel != ''">qualification_level,</if>
+            <if test="responsiblePerson != null and responsiblePerson != ''">responsible_person,</if>
+            <if test="contactInfo != null and contactInfo != ''">contact_info,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="teamName != null and teamName != ''">#{teamName},</if>
+            <if test="qualificationLevel != null and qualificationLevel != ''">#{qualificationLevel},</if>
+            <if test="responsiblePerson != null and responsiblePerson != ''">#{responsiblePerson},</if>
+            <if test="contactInfo != null and contactInfo != ''">#{contactInfo},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTeams" parameterType="Teams">
+        update con_teams
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teamName != null and teamName != ''">team_name = #{teamName},</if>
+            <if test="qualificationLevel != null and qualificationLevel != ''">qualification_level = #{qualificationLevel},</if>
+            <if test="responsiblePerson != null and responsiblePerson != ''">responsible_person = #{responsiblePerson},</if>
+            <if test="contactInfo != null and contactInfo != ''">contact_info = #{contactInfo},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where team_id = #{teamId}
+    </update>
+
+    <delete id="deleteTeamsByTeamId" parameterType="Long">
+        delete from con_teams where team_id = #{teamId}
+    </delete>
+
+    <delete id="deleteTeamsByTeamIds" parameterType="String">
+        delete from con_teams where team_id in 
+        <foreach item="teamId" collection="array" open="(" separator="," close=")">
+            #{teamId}
+        </foreach>
+    </delete>
+</mapper>

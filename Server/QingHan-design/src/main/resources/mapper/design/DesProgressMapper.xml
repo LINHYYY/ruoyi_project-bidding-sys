@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.QingHan.design.mapper.DesProgressMapper">
+    
+    <resultMap type="DesProgress" id="DesProgressResult">
+        <result property="progressId"    column="progress_id"    />
+        <result property="projectId"    column="project_id"    />
+        <result property="constructionDate"    column="construction_date"    />
+        <result property="dailyContent"    column="daily_content"    />
+        <result property="progressDescription"    column="progress_description"    />
+        <result property="constructionDescription"    column="construction_description"    />
+        <result property="uploadTime"    column="upload_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectDesProgressVo">
+        select progress_id, project_id, construction_date, daily_content, progress_description, construction_description, upload_time, create_time from des_progress
+    </sql>
+
+    <select id="selectDesProgressList" parameterType="DesProgress" resultMap="DesProgressResult">
+        <include refid="selectDesProgressVo"/>
+        <where>  
+            <if test="projectId != null "> and project_id = #{projectId}</if>
+            <if test="constructionDate != null "> and construction_date like concat('%', #{constructionDate}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectDesProgressByProgressId" parameterType="Long" resultMap="DesProgressResult">
+        <include refid="selectDesProgressVo"/>
+        where progress_id = #{progressId}
+    </select>
+
+    <insert id="insertDesProgress" parameterType="DesProgress">
+        insert into des_progress
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="progressId != null">progress_id,</if>
+            <if test="projectId != null">project_id,</if>
+            <if test="constructionDate != null">construction_date,</if>
+            <if test="dailyContent != null and dailyContent != ''">daily_content,</if>
+            <if test="progressDescription != null and progressDescription != ''">progress_description,</if>
+            <if test="constructionDescription != null and constructionDescription != ''">construction_description,</if>
+            <if test="uploadTime != null">upload_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="progressId != null">#{progressId},</if>
+            <if test="projectId != null">#{projectId},</if>
+            <if test="constructionDate != null">#{constructionDate},</if>
+            <if test="dailyContent != null and dailyContent != ''">#{dailyContent},</if>
+            <if test="progressDescription != null and progressDescription != ''">#{progressDescription},</if>
+            <if test="constructionDescription != null and constructionDescription != ''">#{constructionDescription},</if>
+            <if test="uploadTime != null">#{uploadTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDesProgress" parameterType="DesProgress">
+        update des_progress
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectId != null">project_id = #{projectId},</if>
+            <if test="constructionDate != null">construction_date = #{constructionDate},</if>
+            <if test="dailyContent != null and dailyContent != ''">daily_content = #{dailyContent},</if>
+            <if test="progressDescription != null and progressDescription != ''">progress_description = #{progressDescription},</if>
+            <if test="constructionDescription != null and constructionDescription != ''">construction_description = #{constructionDescription},</if>
+            <if test="uploadTime != null">upload_time = #{uploadTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where progress_id = #{progressId}
+    </update>
+
+    <delete id="deleteDesProgressByProgressId" parameterType="Long">
+        delete from des_progress where progress_id = #{progressId}
+    </delete>
+
+    <delete id="deleteDesProgressByProgressIds" parameterType="String">
+        delete from des_progress where progress_id in 
+        <foreach item="progressId" collection="array" open="(" separator="," close=")">
+            #{progressId}
+        </foreach>
+    </delete>
+</mapper>

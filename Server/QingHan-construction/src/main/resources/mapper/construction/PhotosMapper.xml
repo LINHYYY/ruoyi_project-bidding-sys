@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.QingHan.construction.mapper.PhotosMapper">
+    
+    <resultMap type="Photos" id="PhotosResult">
+        <result property="photoId"    column="photo_id"    />
+        <result property="projectId"    column="project_id"    />
+        <result property="projectName" column="project_name" />
+        <result property="teamId"    column="team_id"    />
+        <result property="teamName" column="team_name" />
+        <result property="userId"    column="user_id"    />
+        <result property="photoUrl"    column="photo_url"    />
+        <result property="uploadTime"    column="upload_time"    />
+        <!-- 添加施工队负责人名称和联系方式的映射 -->
+        <result property="teamLeaderName" column="team_leader_name" />
+        <result property="teamContactNumber" column="team_contact_number" />
+        <!-- 用户信息映射 -->
+        <result property="userName" column="user_name" />
+    </resultMap>
+
+    <sql id="selectPhotosVo">
+        select photo_id, project_id, team_id, user_id, photo_url, upload_time from con_photos
+    </sql>
+
+    <select id="selectPhotosList" parameterType="Photos" resultMap="PhotosResult">
+        <!--<include refid="selectPhotosVo"/>-->
+        SELECT cp.photo_id,
+        cp.project_id,
+        p.project_name,
+        cp.team_id,
+        t.team_name as team_name,   <!-- 施工队名称 -->
+        cp.user_id,
+        cp.photo_url,
+        cp.upload_time,
+        t.responsible_person as team_leader_name,   <!-- 施工队负责人名称 -->
+        t.contact_info as team_contact_number,   <!-- 施工队联系方式 -->
+        u.user_name
+        FROM con_photos cp
+        LEFT JOIN pro_overview p ON cp.project_id = p.id   <!-- 联接项目表 -->
+        LEFT JOIN con_teams t ON cp.team_id = t.team_id          <!-- 联接施工队表 -->
+        LEFT JOIN sys_user u ON cp.user_id = u.user_id   <!-- 联接用户表 -->
+        <where>
+            <if test="projectId != null">
+                AND cp.project_id = #{projectId}
+            </if>
+            <if test="teamId != null">
+                AND cp.team_id = #{teamId}
+            </if>
+            <if test="userId != null">
+                AND cp.user_id = #{userId}
+            </if>
+            <if test="uploadTime != null">
+                AND cp.upload_time = #{uploadTime}
+            </if>
+            <!--
+            <if test="projectId != null "> and project_id = #{projectId}</if>
+            <if test="teamId != null "> and team_id = #{teamId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="uploadTime != null "> and upload_time = #{uploadTime}</if>
+            -->
+        </where>
+    </select>
+    
+    <select id="selectPhotosByPhotoId" parameterType="Long" resultMap="PhotosResult">
+        <include refid="selectPhotosVo"/>
+        where photo_id = #{photoId}
+    </select>
+
+    <insert id="insertPhotos" parameterType="Photos" useGeneratedKeys="true" keyProperty="photoId">
+        insert into con_photos
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">project_id,</if>
+            <if test="teamId != null">team_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="photoUrl != null and photoUrl != ''">photo_url,</if>
+            <if test="uploadTime != null">upload_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">#{projectId},</if>
+            <if test="teamId != null">#{teamId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="photoUrl != null and photoUrl != ''">#{photoUrl},</if>
+            <if test="uploadTime != null">#{uploadTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePhotos" parameterType="Photos">
+        update con_photos
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectId != null">project_id = #{projectId},</if>
+            <if test="teamId != null">team_id = #{teamId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="photoUrl != null and photoUrl != ''">photo_url = #{photoUrl},</if>
+            <if test="uploadTime != null">upload_time = #{uploadTime},</if>
+        </trim>
+        where photo_id = #{photoId}
+    </update>
+
+    <delete id="deletePhotosByPhotoId" parameterType="Long">
+        delete from con_photos where photo_id = #{photoId}
+    </delete>
+
+    <delete id="deletePhotosByPhotoIds" parameterType="String">
+        delete from con_photos where photo_id in 
+        <foreach item="photoId" collection="array" open="(" separator="," close=")">
+            #{photoId}
+        </foreach>
+    </delete>
+</mapper>

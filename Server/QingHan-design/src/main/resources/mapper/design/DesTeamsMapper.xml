@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.QingHan.design.mapper.DesTeamsMapper">
+    
+    <resultMap type="DesTeams" id="DesTeamsResult">
+        <result property="teamId"    column="team_id"    />
+        <result property="teamName"    column="team_name"    />
+        <result property="qualificationLevel"    column="qualification_level"    />
+        <result property="responsiblePerson"    column="responsible_person"    />
+        <result property="contactInfo"    column="contact_info"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectDesTeamsVo">
+        select team_id, team_name, qualification_level, responsible_person, contact_info, create_time, update_time from des_teams
+    </sql>
+
+    <select id="selectDesTeamsList" parameterType="DesTeams" resultMap="DesTeamsResult">
+        <include refid="selectDesTeamsVo"/>
+        <where>  
+            <if test="teamId != null "> and team_id = #{teamId}</if>
+            <if test="teamName != null  and teamName != ''"> and team_name like concat('%', #{teamName}, '%')</if>
+            <if test="qualificationLevel != null  and qualificationLevel != ''"> and qualification_level = #{qualificationLevel}</if>
+            <if test="responsiblePerson != null  and responsiblePerson != ''"> and responsible_person = #{responsiblePerson}</if>
+            <if test="contactInfo != null  and contactInfo != ''"> and contact_info = #{contactInfo}</if>
+        </where>
+    </select>
+    
+    <select id="selectDesTeamsByTeamId" parameterType="Long" resultMap="DesTeamsResult">
+        <include refid="selectDesTeamsVo"/>
+        where team_id = #{teamId}
+    </select>
+
+    <insert id="insertDesTeams" parameterType="DesTeams">
+        insert into des_teams
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="teamId != null">team_id,</if>
+            <if test="teamName != null and teamName != ''">team_name,</if>
+            <if test="qualificationLevel != null">qualification_level,</if>
+            <if test="responsiblePerson != null and responsiblePerson != ''">responsible_person,</if>
+            <if test="contactInfo != null and contactInfo != ''">contact_info,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="teamId != null">#{teamId},</if>
+            <if test="teamName != null and teamName != ''">#{teamName},</if>
+            <if test="qualificationLevel != null">#{qualificationLevel},</if>
+            <if test="responsiblePerson != null and responsiblePerson != ''">#{responsiblePerson},</if>
+            <if test="contactInfo != null and contactInfo != ''">#{contactInfo},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDesTeams" parameterType="DesTeams">
+        update des_teams
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teamName != null and teamName != ''">team_name = #{teamName},</if>
+            <if test="qualificationLevel != null">qualification_level = #{qualificationLevel},</if>
+            <if test="responsiblePerson != null and responsiblePerson != ''">responsible_person = #{responsiblePerson},</if>
+            <if test="contactInfo != null and contactInfo != ''">contact_info = #{contactInfo},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where team_id = #{teamId}
+    </update>
+
+    <delete id="deleteDesTeamsByTeamId" parameterType="Long">
+        delete from des_teams where team_id = #{teamId}
+    </delete>
+
+    <delete id="deleteDesTeamsByTeamIds" parameterType="String">
+        delete from des_teams where team_id in 
+        <foreach item="teamId" collection="array" open="(" separator="," close=")">
+            #{teamId}
+        </foreach>
+    </delete>
+</mapper>

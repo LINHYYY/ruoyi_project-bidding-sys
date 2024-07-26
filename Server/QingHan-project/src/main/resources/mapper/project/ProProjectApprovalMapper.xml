@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.QingHan.project.mapper.ProProjectApprovalMapper">
+    
+    <resultMap type="ProProjectApproval" id="ProProjectApprovalResult">
+        <result property="approvalId"    column="approval_id"    />
+        <result property="approverId"    column="approver_id"    />
+        <result property="submitterId"    column="submitter_id"    />
+        <result property="imageUrl"    column="Image_url"    />
+        <result property="attachmentPath"    column="attachment_path"    />
+        <result property="submitDate"    column="submit_date"    />
+        <result property="approveDate"    column="approve_date"    />
+        <result property="approvalStatus"    column="approval_status"    />
+    </resultMap>
+
+    <sql id="selectProProjectApprovalVo">
+        select approval_id, approver_id, submitter_id, Image_url, attachment_path, submit_date, approve_date, approval_status from pro_project_approval
+    </sql>
+
+    <select id="selectProProjectApprovalList" parameterType="ProProjectApproval" resultMap="ProProjectApprovalResult">
+        <include refid="selectProProjectApprovalVo"/>
+        <where>  
+            <if test="approverId != null "> and approver_id = #{approverId}</if>
+            <if test="submitterId != null "> and submitter_id = #{submitterId}</if>
+            <if test="imageUrl != null  and imageUrl != ''"> and Image_url = #{imageUrl}</if>
+            <if test="attachmentPath != null  and attachmentPath != ''"> and attachment_path = #{attachmentPath}</if>
+            <if test="submitDate != null "> and submit_date = #{submitDate}</if>
+            <if test="approveDate != null "> and approve_date = #{approveDate}</if>
+            <if test="approvalStatus != null  and approvalStatus != ''"> and approval_status = #{approvalStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectProProjectApprovalByApprovalId" parameterType="Long" resultMap="ProProjectApprovalResult">
+        <include refid="selectProProjectApprovalVo"/>
+        where approval_id = #{approvalId}
+    </select>
+
+    <insert id="insertProProjectApproval" parameterType="ProProjectApproval" useGeneratedKeys="true" keyProperty="approvalId">
+        insert into pro_project_approval
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="approverId != null">approver_id,</if>
+            <if test="submitterId != null">submitter_id,</if>
+            <if test="imageUrl != null">Image_url,</if>
+            <if test="attachmentPath != null">attachment_path,</if>
+            <if test="submitDate != null">submit_date,</if>
+            <if test="approveDate != null">approve_date,</if>
+            <if test="approvalStatus != null">approval_status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="approverId != null">#{approverId},</if>
+            <if test="submitterId != null">#{submitterId},</if>
+            <if test="imageUrl != null">#{imageUrl},</if>
+            <if test="attachmentPath != null">#{attachmentPath},</if>
+            <if test="submitDate != null">#{submitDate},</if>
+            <if test="approveDate != null">#{approveDate},</if>
+            <if test="approvalStatus != null">#{approvalStatus},</if>
+         </trim>
+    </insert>
+
+    <update id="updateProProjectApproval" parameterType="ProProjectApproval">
+        update pro_project_approval
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="approverId != null">approver_id = #{approverId},</if>
+            <if test="submitterId != null">submitter_id = #{submitterId},</if>
+            <if test="imageUrl != null">Image_url = #{imageUrl},</if>
+            <if test="attachmentPath != null">attachment_path = #{attachmentPath},</if>
+            <if test="submitDate != null">submit_date = #{submitDate},</if>
+            <if test="approveDate != null">approve_date = #{approveDate},</if>
+            <if test="approvalStatus != null">approval_status = #{approvalStatus},</if>
+        </trim>
+        where approval_id = #{approvalId}
+    </update>
+
+    <delete id="deleteProProjectApprovalByApprovalId" parameterType="Long">
+        delete from pro_project_approval where approval_id = #{approvalId}
+    </delete>
+
+    <delete id="deleteProProjectApprovalByApprovalIds" parameterType="String">
+        delete from pro_project_approval where approval_id in 
+        <foreach item="approvalId" collection="array" open="(" separator="," close=")">
+            #{approvalId}
+        </foreach>
+    </delete>
+</mapper>

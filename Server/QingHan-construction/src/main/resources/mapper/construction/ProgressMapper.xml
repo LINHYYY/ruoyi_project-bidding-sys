@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.QingHan.construction.mapper.ProgressMapper">
+    
+    <resultMap type="Progress" id="ProgressResult">
+        <result property="progressId"    column="progress_id"    />
+        <result property="projectId"    column="project_id"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="constructionDate"    column="construction_date"    />
+        <result property="dailyContent"    column="daily_content"    />
+        <result property="progressDescription"    column="progress_description"    />
+        <result property="constructionDescription"    column="construction_description"    />
+        <result property="uploadTime"    column="upload_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectProgressVo">
+        select progress_id, project_id, construction_date, daily_content, progress_description, construction_description, upload_time, create_time from con_progress
+    </sql>
+
+    <select id="selectProgressList" parameterType="Progress" resultMap="ProgressResult">
+        <!--<include refid="selectProgressVo"/>-->
+        SELECT p.progress_id, p.project_id, p.construction_date, p.daily_content,
+        p.progress_description, p.construction_description, p.upload_time, p.create_time,
+        o.project_name
+        FROM con_progress p
+        INNER JOIN pro_overview o ON p.project_id = o.id
+        <where>  
+            <if test="progressId != null "> and progress_id = #{progressId}</if>
+            <if test="projectId != null "> and project_id = #{projectId}</if>
+            <if test="constructionDate != null "> and construction_date = #{constructionDate}</if>
+            <if test="dailyContent != null  and dailyContent != ''"> and daily_content = #{dailyContent}</if>
+            <if test="progressDescription != null  and progressDescription != ''"> and progress_description = #{progressDescription}</if>
+            <if test="constructionDescription != null  and constructionDescription != ''"> and construction_description = #{constructionDescription}</if>
+            <if test="uploadTime != null "> and upload_time &lt;= #{uploadTime}</if>
+            <if test="createTime != null "> and create_time &lt;= #{createTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectProgressByProgressId" parameterType="Long" resultMap="ProgressResult">
+        <include refid="selectProgressVo"/>
+        where progress_id = #{progressId}
+    </select>
+
+    <insert id="insertProgress" parameterType="Progress" useGeneratedKeys="true" keyProperty="progressId">
+        insert into con_progress
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">project_id,</if>
+            <if test="constructionDate != null">construction_date,</if>
+            <if test="dailyContent != null and dailyContent != ''">daily_content,</if>
+            <if test="progressDescription != null and progressDescription != ''">progress_description,</if>
+            <if test="constructionDescription != null and constructionDescription != ''">construction_description,</if>
+            <if test="uploadTime != null">upload_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">#{projectId},</if>
+            <if test="constructionDate != null">#{constructionDate},</if>
+            <if test="dailyContent != null and dailyContent != ''">#{dailyContent},</if>
+            <if test="progressDescription != null and progressDescription != ''">#{progressDescription},</if>
+            <if test="constructionDescription != null and constructionDescription != ''">#{constructionDescription},</if>
+            <if test="uploadTime != null">#{uploadTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateProgress" parameterType="Progress">
+        update con_progress
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectId != null">project_id = #{projectId},</if>
+            <if test="constructionDate != null">construction_date = #{constructionDate},</if>
+            <if test="dailyContent != null and dailyContent != ''">daily_content = #{dailyContent},</if>
+            <if test="progressDescription != null and progressDescription != ''">progress_description = #{progressDescription},</if>
+            <if test="constructionDescription != null and constructionDescription != ''">construction_description = #{constructionDescription},</if>
+            <if test="uploadTime != null">upload_time = #{uploadTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where progress_id = #{progressId}
+    </update>
+
+    <delete id="deleteProgressByProgressId" parameterType="Long">
+        delete from con_progress where progress_id = #{progressId}
+    </delete>
+
+    <delete id="deleteProgressByProgressIds" parameterType="String">
+        delete from con_progress where progress_id in 
+        <foreach item="progressId" collection="array" open="(" separator="," close=")">
+            #{progressId}
+        </foreach>
+    </delete>
+</mapper>

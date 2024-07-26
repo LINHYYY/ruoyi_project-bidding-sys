@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.QingHan.project.mapper.ProProjectProgressMapper">
+    
+    <resultMap type="ProProjectProgress" id="ProProjectProgressResult">
+        <result property="progressId"    column="progress_id"    />
+        <result property="detailId"    column="detail_id"    />
+        <result property="status"    column="status"    />
+        <result property="bidderId"    column="bidder_id"    />
+        <result property="teamId"    column="team_id"    />
+        <result property="managerId"    column="manager_id"    />
+        <result property="currentStage"    column="current_stage"    />
+        <result property="startDate"    column="start_date"    />
+        <result property="endDate"    column="end_date"    />
+    </resultMap>
+
+    <sql id="selectProProjectProgressVo">
+        select progress_id, detail_id, status, bidder_id, team_id, manager_id, current_stage, start_date, end_date from pro_project_progress
+    </sql>
+
+    <select id="selectProProjectProgressList" parameterType="ProProjectProgress" resultMap="ProProjectProgressResult">
+        <include refid="selectProProjectProgressVo"/>
+        <where>  
+            <if test="detailId != null "> and detail_id = #{detailId}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="bidderId != null "> and bidder_id = #{bidderId}</if>
+            <if test="teamId != null "> and team_id = #{teamId}</if>
+            <if test="managerId != null "> and manager_id = #{managerId}</if>
+            <if test="currentStage != null  and currentStage != ''"> and current_stage = #{currentStage}</if>
+            <if test="startDate != null "> and start_date = #{startDate}</if>
+            <if test="endDate != null "> and end_date = #{endDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectProProjectProgressByProgressId" parameterType="Long" resultMap="ProProjectProgressResult">
+        <include refid="selectProProjectProgressVo"/>
+        where progress_id = #{progressId}
+    </select>
+
+    <insert id="insertProProjectProgress" parameterType="ProProjectProgress" useGeneratedKeys="true" keyProperty="progressId">
+        insert into pro_project_progress
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="detailId != null">detail_id,</if>
+            <if test="status != null">status,</if>
+            <if test="bidderId != null">bidder_id,</if>
+            <if test="teamId != null">team_id,</if>
+            <if test="managerId != null">manager_id,</if>
+            <if test="currentStage != null">current_stage,</if>
+            <if test="startDate != null">start_date,</if>
+            <if test="endDate != null">end_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="detailId != null">#{detailId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="bidderId != null">#{bidderId},</if>
+            <if test="teamId != null">#{teamId},</if>
+            <if test="managerId != null">#{managerId},</if>
+            <if test="currentStage != null">#{currentStage},</if>
+            <if test="startDate != null">#{startDate},</if>
+            <if test="endDate != null">#{endDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateProProjectProgress" parameterType="ProProjectProgress">
+        update pro_project_progress
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="detailId != null">detail_id = #{detailId},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="bidderId != null">bidder_id = #{bidderId},</if>
+            <if test="teamId != null">team_id = #{teamId},</if>
+            <if test="managerId != null">manager_id = #{managerId},</if>
+            <if test="currentStage != null">current_stage = #{currentStage},</if>
+            <if test="startDate != null">start_date = #{startDate},</if>
+            <if test="endDate != null">end_date = #{endDate},</if>
+        </trim>
+        where progress_id = #{progressId}
+    </update>
+
+    <delete id="deleteProProjectProgressByProgressId" parameterType="Long">
+        delete from pro_project_progress where progress_id = #{progressId}
+    </delete>
+
+    <delete id="deleteProProjectProgressByProgressIds" parameterType="String">
+        delete from pro_project_progress where progress_id in 
+        <foreach item="progressId" collection="array" open="(" separator="," close=")">
+            #{progressId}
+        </foreach>
+    </delete>
+</mapper>

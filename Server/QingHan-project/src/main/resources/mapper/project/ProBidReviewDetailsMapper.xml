@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.QingHan.project.mapper.ProBidReviewDetailsMapper">
+    
+    <resultMap type="ProBidReviewDetails" id="ProBidReviewDetailsResult">
+        <result property="detailId"    column="detail_id"    />
+        <result property="id"    column="id"    />
+        <result property="costReporting"    column="cost_reporting"    />
+        <result property="profitEstimate"    column="profit_estimate"    />
+        <result property="bonusRatio"    column="bonus_ratio"    />
+        <result property="bidderId"    column="bidder_id"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="bidDocument"    column="bid_document"    />
+        <result property="sensitiveFlag"    column="sensitive_flag"    />
+        <result property="startDate"    column="start_date"    />
+        <result property="endDate"    column="end_date"    />
+        <result property="reviewTime"    column="review_time"    />
+        <result property="bidReviewStatus"    column="bid_review_status"    />
+    </resultMap>
+
+    <sql id="selectProBidReviewDetailsVo">
+        select detail_id, id, cost_reporting, profit_estimate, bonus_ratio, bidder_id, phone_number, bid_document, sensitive_flag, start_date, end_date, review_time, bid_review_status from pro_bid_review_details
+    </sql>
+
+    <select id="selectProBidReviewDetailsList" parameterType="ProBidReviewDetails" resultMap="ProBidReviewDetailsResult">
+        <include refid="selectProBidReviewDetailsVo"/>
+        <where>  
+            <if test="costReporting != null "> and cost_reporting = #{costReporting}</if>
+            <if test="profitEstimate != null "> and profit_estimate = #{profitEstimate}</if>
+            <if test="bonusRatio != null "> and bonus_ratio = #{bonusRatio}</if>
+            <if test="bidderId != null "> and bidder_id = #{bidderId}</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="bidDocument != null  and bidDocument != ''"> and bid_document = #{bidDocument}</if>
+            <if test="sensitiveFlag != null "> and sensitive_flag = #{sensitiveFlag}</if>
+            <if test="startDate != null "> and start_date = #{startDate}</if>
+            <if test="endDate != null "> and end_date = #{endDate}</if>
+            <if test="reviewTime != null "> and review_time = #{reviewTime}</if>
+            <if test="bidReviewStatus != null  and bidReviewStatus != ''"> and bid_review_status = #{bidReviewStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectProBidReviewDetailsByDetailId" parameterType="Long" resultMap="ProBidReviewDetailsResult">
+        <include refid="selectProBidReviewDetailsVo"/>
+        where detail_id = #{detailId}
+    </select>
+
+    <insert id="insertProBidReviewDetails" parameterType="ProBidReviewDetails" useGeneratedKeys="true" keyProperty="detailId">
+        insert into pro_bid_review_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="costReporting != null">cost_reporting,</if>
+            <if test="profitEstimate != null">profit_estimate,</if>
+            <if test="bonusRatio != null">bonus_ratio,</if>
+            <if test="bidderId != null">bidder_id,</if>
+            <if test="phoneNumber != null and phoneNumber != ''">phone_number,</if>
+            <if test="bidDocument != null and bidDocument != ''">bid_document,</if>
+            <if test="sensitiveFlag != null">sensitive_flag,</if>
+            <if test="startDate != null">start_date,</if>
+            <if test="endDate != null">end_date,</if>
+            <if test="reviewTime != null">review_time,</if>
+            <if test="bidReviewStatus != null">bid_review_status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="costReporting != null">#{costReporting},</if>
+            <if test="profitEstimate != null">#{profitEstimate},</if>
+            <if test="bonusRatio != null">#{bonusRatio},</if>
+            <if test="bidderId != null">#{bidderId},</if>
+            <if test="phoneNumber != null and phoneNumber != ''">#{phoneNumber},</if>
+            <if test="bidDocument != null and bidDocument != ''">#{bidDocument},</if>
+            <if test="sensitiveFlag != null">#{sensitiveFlag},</if>
+            <if test="startDate != null">#{startDate},</if>
+            <if test="endDate != null">#{endDate},</if>
+            <if test="reviewTime != null">#{reviewTime},</if>
+            <if test="bidReviewStatus != null">#{bidReviewStatus},</if>
+         </trim>
+    </insert>
+
+    <update id="updateProBidReviewDetails" parameterType="ProBidReviewDetails">
+        update pro_bid_review_details
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null">id = #{id},</if>
+            <if test="costReporting != null">cost_reporting = #{costReporting},</if>
+            <if test="profitEstimate != null">profit_estimate = #{profitEstimate},</if>
+            <if test="bonusRatio != null">bonus_ratio = #{bonusRatio},</if>
+            <if test="bidderId != null">bidder_id = #{bidderId},</if>
+            <if test="phoneNumber != null and phoneNumber != ''">phone_number = #{phoneNumber},</if>
+            <if test="bidDocument != null and bidDocument != ''">bid_document = #{bidDocument},</if>
+            <if test="sensitiveFlag != null">sensitive_flag = #{sensitiveFlag},</if>
+            <if test="startDate != null">start_date = #{startDate},</if>
+            <if test="endDate != null">end_date = #{endDate},</if>
+            <if test="reviewTime != null">review_time = #{reviewTime},</if>
+            <if test="bidReviewStatus != null">bid_review_status = #{bidReviewStatus},</if>
+        </trim>
+        where detail_id = #{detailId}
+    </update>
+
+    <delete id="deleteProBidReviewDetailsByDetailId" parameterType="Long">
+        delete from pro_bid_review_details where detail_id = #{detailId}
+    </delete>
+
+    <delete id="deleteProBidReviewDetailsByDetailIds" parameterType="String">
+        delete from pro_bid_review_details where detail_id in 
+        <foreach item="detailId" collection="array" open="(" separator="," close=")">
+            #{detailId}
+        </foreach>
+    </delete>
+</mapper>

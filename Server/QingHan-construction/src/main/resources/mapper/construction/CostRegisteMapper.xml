@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.QingHan.construction.mapper.CostRegisteMapper">
+    
+    <resultMap type="CostRegiste" id="CostRegisteResult">
+        <result property="registartionId"    column="registartion_id"    />
+        <result property="projectId"    column="project_id"    />
+        <result property="projectName" column="project_name" />
+        <result property="costType"    column="cost_type"    />
+        <result property="costItem"    column="cost_item"    />
+        <result property="amount"    column="amount"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+    </resultMap>
+
+    <sql id="selectCostRegisteVo">
+        select registartion_id, project_id, cost_type, cost_item, amount, create_date, update_date from con_cost_registe
+    </sql>
+
+    <select id="selectCostRegisteList" parameterType="CostRegiste" resultMap="CostRegisteResult">
+        <!--<include refid="selectCostRegisteVo"/>-->
+        SELECT c.registartion_id, c.project_id, p.project_name, c.cost_type, c.cost_item, c.amount, c.create_date, c.update_date
+        FROM con_cost_registe c
+        LEFT JOIN pro_overview p ON c.project_id = p.id
+        <where>  
+            <if test="projectId != null "> and project_id = #{projectId}</if>
+            <if test="costType != null  and costType != ''"> and cost_type = #{costType}</if>
+            <if test="costItem != null  and costItem != ''"> and cost_item = #{costItem}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+        </where>
+    </select>
+    
+    <select id="selectCostRegisteByRegistartionId" parameterType="Long" resultMap="CostRegisteResult">
+        <include refid="selectCostRegisteVo"/>
+        where registartion_id = #{registartionId}
+    </select>
+
+    <insert id="insertCostRegiste" parameterType="CostRegiste" useGeneratedKeys="true" keyProperty="registartionId">
+        insert into con_cost_registe
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">project_id,</if>
+            <if test="costType != null and costType != ''">cost_type,</if>
+            <if test="costItem != null and costItem != ''">cost_item,</if>
+            <if test="amount != null">amount,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="updateDate != null">update_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">#{projectId},</if>
+            <if test="costType != null and costType != ''">#{costType},</if>
+            <if test="costItem != null and costItem != ''">#{costItem},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCostRegiste" parameterType="CostRegiste">
+        update con_cost_registe
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectId != null">project_id = #{projectId},</if>
+            <if test="costType != null and costType != ''">cost_type = #{costType},</if>
+            <if test="costItem != null and costItem != ''">cost_item = #{costItem},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+        </trim>
+        where registartion_id = #{registartionId}
+    </update>
+
+    <delete id="deleteCostRegisteByRegistartionId" parameterType="Long">
+        delete from con_cost_registe where registartion_id = #{registartionId}
+    </delete>
+
+    <delete id="deleteCostRegisteByRegistartionIds" parameterType="String">
+        delete from con_cost_registe where registartion_id in 
+        <foreach item="registartionId" collection="array" open="(" separator="," close=")">
+            #{registartionId}
+        </foreach>
+    </delete>
+</mapper>
