@@ -1,0 +1,88 @@
+
+page {
+	background-color: #f7f7f7;
+}
+
+@charset "UTF-8";
+/**
+ * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
+ * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
+ */
+.key-show.data-v-59963ed4 {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 95;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 80rpx;
+  height: 80rpx;
+  background-color: #2979ff;
+  border-radius: 100rpx;
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #fff;
+  opacity: 0;
+}
+.key-show.show.data-v-59963ed4 {
+  opacity: 1;
+}
+.keyList.data-v-59963ed4 {
+  position: relative;
+}
+.keyList .keyword.data-v-59963ed4 {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  top: 0px;
+  z-index: 95;
+  padding-top: 6rpx;
+  padding-left: 30rpx;
+  width: 100%;
+  height: 66rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 700;
+  background-color: #f7f7f7;
+}
+.keyList .item.data-v-59963ed4 {
+  padding-left: 30rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  color: #333;
+  background-color: #fff;
+}
+.keyList .item.data-v-59963ed4:after {
+  left: 30rpx;
+}
+.keyList .item .cn-name.data-v-59963ed4 {
+  margin-left: 12rpx;
+  color: #666;
+}
+/* 右侧索引 */
+.key-list.data-v-59963ed4 {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  z-index: 96;
+  padding-right: 20rpx;
+  padding-left: 40rpx;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+.key-list .key-item.data-v-59963ed4 {
+  width: 40rpx;
+  height: 40rpx;
+  margin-bottom: 2rpx;
+  text-align: center;
+  line-height: 40rpx;
+  font-size: 26rpx;
+  color: #333;
+  border-radius: 100rpx;
+}
+.key-list .active.data-v-59963ed4 {
+  background-color: #2979ff;
+  color: #fff;
+}
+

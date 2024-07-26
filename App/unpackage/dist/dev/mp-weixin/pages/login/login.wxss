@@ -1,0 +1,159 @@
+
+page {
+  background-color: #ffffff;
+}
+
+@charset "UTF-8";
+/**
+ * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
+ * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
+ */
+.txt.data-v-b237504c {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+.img-a.data-v-b237504c {
+  width: 100%;
+  height: 450rpx;
+  background-image: url(https://zhoukaiwen.com/img/loginImg/head.png);
+  background-size: 100%;
+}
+.reg.data-v-b237504c {
+  font-size: 28rpx;
+  color: #fff;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 50rpx;
+  font-weight: bold;
+  background: #f5f6fa;
+  color: #000000;
+  text-align: center;
+  margin-top: 30rpx;
+}
+.login-view.data-v-b237504c {
+  width: 100%;
+  position: relative;
+  margin-top: -120rpx;
+  background-color: #ffffff;
+  border-radius: 8% 8% 0% 0;
+}
+.t-login.data-v-b237504c {
+  width: 600rpx;
+  margin: 0 auto;
+  font-size: 28rpx;
+  padding-top: 80rpx;
+}
+.t-login button.data-v-b237504c {
+  font-size: 28rpx;
+  background: #2796f2;
+  color: #fff;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 50rpx;
+  font-weight: bold;
+}
+.t-login input.data-v-b237504c {
+  height: 90rpx;
+  line-height: 90rpx;
+  margin-bottom: 50rpx;
+  border-bottom: 1px solid #e9e9e9;
+  font-size: 28rpx;
+}
+.t-login .t-a.data-v-b237504c {
+  position: relative;
+}
+.t-b.data-v-b237504c {
+  text-align: left;
+  font-size: 42rpx;
+  color: #ffffff;
+  padding: 130rpx 0 0 70rpx;
+  font-weight: bold;
+  line-height: 70rpx;
+}
+.t-login .t-c.data-v-b237504c {
+  position: absolute;
+  right: 22rpx;
+  top: 22rpx;
+  background: #5677fc;
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding: 0 25rpx;
+}
+.t-login .t-d.data-v-b237504c {
+  text-align: center;
+  color: #999;
+  margin: 80rpx 0;
+}
+.t-login .t-e.data-v-b237504c {
+  text-align: center;
+  width: 250rpx;
+  margin: 80rpx auto 0;
+}
+.t-login .t-g.data-v-b237504c {
+  float: left;
+  width: 50%;
+}
+.t-login .t-e image.data-v-b237504c {
+  width: 50rpx;
+  height: 50rpx;
+}
+.t-login .t-f.data-v-b237504c {
+  text-align: center;
+  margin: 150rpx 0 0 0;
+  color: #666;
+}
+.t-login .t-f text.data-v-b237504c {
+  margin-left: 20rpx;
+  color: #aaaaaa;
+  font-size: 27rpx;
+}
+.t-login .uni-input-placeholder.data-v-b237504c {
+  color: #aeaeae;
+}
+.cl.data-v-b237504c {
+  zoom: 1;
+}
+.cl.data-v-b237504c:after {
+  clear: both;
+  display: block;
+  visibility: hidden;
+  height: 0;
+  content: '\20';
+}
+.buttom .loginType.data-v-b237504c {
+  display: flex;
+  padding: 140rpx 0;
+  justify-content: center;
+}
+.buttom .loginType .item.data-v-b237504c {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #909399;
+  font-size: 22rpx;
+}
+.buttom .hint.data-v-b237504c {
+  position: absolute;
+  bottom: 0;
+  padding: 20rpx 40rpx;
+  font-size: 20rpx;
+  color: #909399;
+}
+.buttom .hint .link.data-v-b237504c {
+  color: #2979ff;
+}
+.clearBtn.data-v-b237504c {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  background-color: #FFFFFF;
+}
+.clearBtn.data-v-b237504c::after {
+  position: unset !important;
+  border: unset;
+}
+

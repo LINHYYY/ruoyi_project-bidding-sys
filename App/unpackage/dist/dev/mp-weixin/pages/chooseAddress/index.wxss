@@ -1,0 +1,136 @@
+
+page {
+	height: 100%;
+	background: #F6F6F6;
+}
+
+@charset "UTF-8";
+/**
+ * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
+ * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
+ */
+.app.data-v-26e75b37 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+.row.data-v-26e75b37 {
+  display: flex;
+  align-items: center;
+}
+.b-b.data-v-26e75b37 {
+  position: relative;
+}
+.b-b.data-v-26e75b37:after {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  top: auto;
+  bottom: 0;
+  right: 0;
+  height: 0;
+  content: '';
+  -webkit-transform: scaleY(0.5);
+          transform: scaleY(0.5);
+  border-bottom: 1px solid #e5e5e5;
+}
+.clamp.data-v-26e75b37 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+.current-address.data-v-26e75b37 {
+  height: 120rpx;
+  padding: 0 24rpx;
+  background-color: #fff;
+}
+.current-address .left.data-v-26e75b37 {
+  width: 634rpx;
+}
+.current-address .red.data-v-26e75b37 {
+  flex-shrink: 0;
+  margin-right: 6rpx;
+  font-size: 28rpx;
+  color: #2979ff;
+  line-height: 36rpx;
+}
+.current-address .title.data-v-26e75b37 {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  line-height: 36rpx;
+}
+.current-address .addr.data-v-26e75b37 {
+  width: 700rpx;
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #909399;
+  line-height: 1.4;
+}
+.current-address .ser-icon.data-v-26e75b37 {
+  flex-shrink: 0;
+  width: 66rpx;
+  height: 66rpx;
+  padding: 12rpx 4rpx 12rpx 20rpx;
+}
+.confirm-wrap.data-v-26e75b37 {
+  height: 88rpx;
+  padding: 0 24rpx;
+  background-color: #fff;
+}
+.confirm-wrap .input.data-v-26e75b37 {
+  flex: 1;
+  font-size: 28rpx;
+  color: #303133;
+}
+.confirm-wrap .btn.data-v-26e75b37 {
+  width: 700rpx;
+  padding: 0 25rpx;
+  font-size: 26rpx;
+  color: #fff;
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: #2979ff;
+  border-radius: 100rpx;
+  text-align: center;
+}
+.map.data-v-26e75b37 {
+  width: 750rpx;
+  height: 700rpx;
+}
+.map .map-center-icon.data-v-26e75b37 {
+  position: absolute;
+  left: 339rpx;
+  top: 264rpx;
+  width: 72rpx;
+  height: 72rpx;
+}
+.addr-list-scroll.data-v-26e75b37 {
+  flex: 1;
+  overflow: hidden;
+}
+.addr-list-scroll .addr-list.data-v-26e75b37 {
+  background-color: #fff;
+}
+.addr-list-scroll .addr-item.data-v-26e75b37 {
+  padding: 24rpx;
+}
+.addr-list-scroll .left.data-v-26e75b37 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-right: 50rpx;
+}
+.addr-list-scroll .title.data-v-26e75b37 {
+  font-size: 28rpx;
+  color: #303133;
+}
+.addr-list-scroll .addr.data-v-26e75b37 {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #909399;
+  line-height: 1.4;
+}
+

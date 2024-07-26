@@ -1,0 +1,70 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/center/center",
+    "pages/login/login",
+    "pages/login/code",
+    "pages/login/account",
+    "pages/login/problem",
+    "pages/profile/setting",
+    "pages/profile/profile",
+    "pages/profile/password",
+    "pages/search/search",
+    "pages/location/location",
+    "pages/notice/notice",
+    "pages/content/content",
+    "pages/profile/aboutMe",
+    "pages/search/searchList",
+    "pages/detail/detail",
+    "pages/detail/addHouse",
+    "pages/detail/preHouse",
+    "pages/center/tips",
+    "pages/center/order",
+    "pages/center/heart",
+    "pages/center/history",
+    "pages/profile/avatar",
+    "pages/chooseAddress/index",
+    "pages/chooseAddress/search",
+    "pages/chooseAddress/cityList",
+    "pages/webview/webview"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "World",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "color": "#909399",
+    "selectedColor": "#2979ff",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/index.png",
+        "selectedIconPath": "static/index-selected.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/center/center",
+        "iconPath": "static/center.png",
+        "selectedIconPath": "static/center-selected.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置将用于绑定您的区域"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "onLocationChange",
+    "startLocationUpdateBackground",
+    "chooseAddress"
+  ],
+  "usingComponents": {}
+}
