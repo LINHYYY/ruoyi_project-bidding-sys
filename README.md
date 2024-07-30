@@ -44,9 +44,12 @@ ruoyi_project-bidding-sys 是一个基于 [RuoYi](https://github.com/yangzongzhu
 
 ### 项目结构
 模型文件需要安置在指定目录下进行使用，详情请看若依官方视频中配置说明。
-![](resources/94846.png)
+
+<img src="resources/94846.png" height="300">
+
 为每个业务模块进行了后端的模块管理，为每个核心功能群进行独立模块的创建。
-![](resources/1115.png)
+
+<img src="resources/1115.png" height="500">
 
 
 ### 运行步骤
@@ -59,8 +62,9 @@ ruoyi_project-bidding-sys 是一个基于 [RuoYi](https://github.com/yangzongzhu
 
 -----
 ## 运行展示
-![](resources/4613.png)
-![](resources/4652.png)
+<img src="resources/4613.png" height="600">
+<img src="resources/4652.png" height="600">
+
 ![](resources/1112.png)
 ![](resources/1113.png)
 
