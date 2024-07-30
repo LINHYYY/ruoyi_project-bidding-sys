@@ -45,10 +45,12 @@ Please use the [RuoYi](https://github.com/yangzongzhuan/RuoYi) framework for bas
 
 ### Project structure
 The model file needs to be placed in a specified directory for use, please refer to the configuration instructions in the official video for details.
-![](resources/94846.png)
-The back-end module management is carried out for each business module, and the independent module is created for each core functional group.
-![](resources/1115.png)
 
+<img src="resources/94846.png" height="300">
+
+The back-end module management is carried out for each business module, and the independent module is created for each core functional group.
+
+<img src="resources/1115.png" height="500">
 
 ### Run Steps
 [Ruoyi Official Video](https://www.bilibili.com/video/BV1pf421B71v/?spm_id_from=333.337.search-card.all.click&vd_source=38a6ca096c69b42b176bdfa0ab4e928c)
@@ -60,8 +62,9 @@ The back-end module management is carried out for each business module, and the 
 
 -----
 ## Run the showcase
-![](resources/4613.png)
-![](resources/4652.png)
+<img src="resources/4613.png" height="600">
+<img src="resources/4652.png" height="600">
+
 ![](resources/1112.png)
 ![](resources/1113.png)
 
