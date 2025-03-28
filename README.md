@@ -1,11 +1,7 @@
 # ruoyi_project-bidding-sys
 
-*Read this in [中文](README.md).*
 ## introduce
 ruoyi_project-bidding-sys is a project bidding management system based on the [RuoYi](https://github.com/yangzongzhuan) framework, including the design of **Web front-end, applet, back-end and database table structure**, applet is the bidding client, and Web is the system management end. The project realizes the user registration function and login function of the applet and the web side, the review of the user registration account and the management of permissions, the management of roles, and the management of personnel; Realize the new project, project modification, project review and release on the web management side; It realizes the project information viewing, project participation, and uploading photos and attachments of the project implementation process in the bidding business of the Mini Program client.
-
-![](resources/94245.png)
-
 
 #### User Classification
 ##### 1. Platform Managers Web:
@@ -45,12 +41,7 @@ Please use the [RuoYi](https://github.com/yangzongzhuan/RuoYi) framework for bas
 
 ### Project structure
 The model file needs to be placed in a specified directory for use, please refer to the configuration instructions in the official video for details.
-
-<img src="resources/94846.png" height="300">
-
 The back-end module management is carried out for each business module, and the independent module is created for each core functional group.
-
-<img src="resources/1115.png" height="500">
 
 ### Run Steps
 [Ruoyi Official Video](https://www.bilibili.com/video/BV1pf421B71v/?spm_id_from=333.337.search-card.all.click&vd_source=38a6ca096c69b42b176bdfa0ab4e928c)
@@ -62,9 +53,6 @@ The back-end module management is carried out for each business module, and the 
 
 -----
 ## Run the showcase
-<img src="resources/4613.png" height="600">
-<img src="resources/4652.png" height="600">
-
 ![](resources/1112.png)
 ![](resources/1113.png)
 
@@ -78,10 +66,6 @@ I would like to express my gratitude to the authors of the RuoYi open source com
 - [RuoYi-Sever](https://github.com/yangzongzhuan/RuoYi)
 - [RuoYi-App](https://github.com/yangzongzhuan/RuoYi-App)
 - [RuoYi-Vue3](https://github.com/yangzongzhuan/RuoYi-Vue3)
-
-- [RuoYi-Gitee](https://gitee.com/y_project)
-- [RuoYi-Sever(Gitee)](https://gitee.com/y_project/RuoYi)
-- [RuoYi-App(Gitee)](https://gitee.com/y_project/RuoYi-App)
 - [RuoYi-Vue(Gitee)](https://gitee.com/y_project/RuoYi-Vue)
 
 - [RuoYi Online experience](http://vue.ruoyi.vip)
